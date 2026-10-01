@@ -1,0 +1,1568 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>ShivHeadphones // Premium Audio Architecture</title>
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Sora:wght@600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  
+  <!-- Tailwind CSS & Custom Theme -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "error": "#ffb4ab",
+            "inverse-on-surface": "#303034",
+            "on-error-container": "#ffdad6",
+            "on-background": "#e3e2e6",
+            "on-tertiary": "#00363a",
+            "tertiary-fixed-dim": "#00dbe9",
+            "surface-variant": "#343538",
+            "tertiary-container": "#00a0aa",
+            "surface-tint": "#ffb3b2",
+            "inverse-primary": "#bf002a",
+            "secondary-fixed-dim": "#ffb693",
+            "primary-fixed": "#ffdad8",
+            "surface": "#121316",
+            "on-surface": "#e3e2e6",
+            "tertiary-fixed": "#7df4ff",
+            "on-secondary-container": "#572000",
+            "surface-container-low": "#1b1b1f",
+            "background": "#121316",
+            "secondary-container": "#fe6b00",
+            "surface-container-lowest": "#0d0e11",
+            "on-surface-variant": "#e9bcba",
+            "outline-variant": "#5f3e3e",
+            "on-tertiary-fixed-variant": "#004f54",
+            "inverse-surface": "#e3e2e6",
+            "on-primary-fixed": "#410008",
+            "on-error": "#690005",
+            "on-primary-container": "#5b000f",
+            "primary": "#ffb3b2",
+            "surface-container-high": "#292a2d",
+            "surface-dim": "#121316",
+            "on-tertiary-fixed": "#002022",
+            "on-secondary-fixed-variant": "#7a3000",
+            "secondary-fixed": "#ffdbcc",
+            "on-tertiary-container": "#002f33",
+            "primary-fixed-dim": "#ffb3b2",
+            "secondary": "#ffb693",
+            "surface-container-highest": "#343538",
+            "on-primary-fixed-variant": "#92001e",
+            "surface-bright": "#38393c",
+            "on-primary": "#680012",
+            "error-container": "#93000a",
+            "on-secondary-fixed": "#351000",
+            "primary-container": "#ff525c",
+            "surface-container": "#1f1f23",
+            "on-secondary": "#561f00",
+            "outline": "#af8786",
+            "tertiary": "#00dbe9"
+          },
+          borderRadius: {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          spacing: {
+            "space-xl": "2.5rem",
+            "space-sm": "0.5rem",
+            "space-md": "1rem",
+            "gutter-sm": "1rem",
+            "margin": "2rem",
+            "margin-desktop": "4rem",
+            "space-2xl": "4rem",
+            "space-lg": "1.5rem",
+            "space-3xl": "6rem",
+            "space-xs": "0.25rem",
+            "gutter-lg": "2rem",
+            "margin-mobile": "1.25rem",
+            "gutter": "1.5rem"
+          },
+          fontFamily: {
+            "headline-lg-mobile": ["Sora"],
+            "label-md": ["JetBrains Mono"],
+            "body-sm": ["Space Grotesk"],
+            "display-xl": ["Sora"],
+            "display-lg-mobile": ["Sora"],
+            "headline-lg": ["Sora"],
+            "label-sm": ["JetBrains Mono"],
+            "display-lg": ["Sora"],
+            "body-lg": ["Space Grotesk"],
+            "headline-sm": ["Sora"],
+            "label-lg": ["JetBrains Mono"],
+            "headline-md": ["Sora"],
+            "body-md": ["Space Grotesk"],
+            "display-xl-mobile": ["Sora"]
+          },
+          fontSize: {
+            "headline-lg-mobile": ["26px", { "lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.08em", "fontWeight": "500" }],
+            "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "display-xl": ["72px", { "lineHeight": "80px", "letterSpacing": "-0.03em", "fontWeight": "800" }],
+            "display-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "headline-lg": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "label-sm": ["10px", { "lineHeight": "14px", "letterSpacing": "0.12em", "fontWeight": "600" }],
+            "display-lg": ["56px", { "lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+            "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.06em", "fontWeight": "500" }],
+            "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+            "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "display-xl-mobile": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800" }]
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Three.js Library for Realtime 3D Model -->
+  <script src="https://ajax.googleapis.com/ajax/libs/threejs/r125/three.min.js"></script>
+
+  <link rel="stylesheet" href="./style.css" />
+</head>
+
+<body class="bg-background font-body-md text-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container">
+
+  <!-- Loading Screen -->
+  <div id="loader" class="loader">
+    <div class="loader-inner">
+      <div class="loader-bar-bg">
+        <div id="loader-bar" class="loader-bar-fill"></div>
+      </div>
+      <span id="loader-text" class="loader-text">Loading 0%</span>
+    </div>
+  </div>
+
+  <!-- ==================== STICKY NAVBAR ==================== -->
+  <header id="main-navbar" class="fixed top-0 left-0 w-full z-50 transition-opacity duration-500 ease-out" style="opacity: 1;">
+    <nav class="w-full px-4 md:px-6 lg:px-10 py-1.5 md:py-2 flex items-center justify-between bg-surface-container-lowest/70 backdrop-blur-xl border-b border-white/[0.06]">
+
+      <!-- Logo -->
+      <a href="#" class="flex items-center gap-1.5 group">
+        <span class="material-symbols-outlined text-primary-container text-[22px] group-hover:rotate-12 transition-transform">headphones</span>
+        <span class="font-headline-md text-[16px] tracking-tight text-on-surface uppercase font-bold">
+          Shiv<span class="text-primary-container">H</span>eadphones
+        </span>
+      </a>
+
+      <!-- Center Nav Links (hidden on mobile) -->
+      <div class="hidden lg:flex items-center gap-7">
+        <a href="#" onclick="event.preventDefault(); document.getElementById('explore-modal').classList.remove('hidden')" class="font-label-md text-[11px] text-on-surface-variant hover:text-on-surface tracking-[0.1em] uppercase transition-colors relative group cursor-pointer">
+          Explore
+          <span class="absolute -bottom-0.5 left-0 w-0 h-[2px] bg-primary-container group-hover:w-full transition-all duration-300"></span>
+        </a>
+        <a href="#acoustic-core" class="font-label-md text-[11px] text-on-surface-variant hover:text-on-surface tracking-[0.1em] uppercase transition-colors relative group">
+          Service
+          <span class="absolute -bottom-0.5 left-0 w-0 h-[2px] bg-primary-container group-hover:w-full transition-all duration-300"></span>
+        </a>
+        <a href="#order-terminal" class="font-label-md text-[11px] text-on-surface-variant hover:text-on-surface tracking-[0.1em] uppercase transition-colors relative group">
+          Price
+          <span class="absolute -bottom-0.5 left-0 w-0 h-[2px] bg-primary-container group-hover:w-full transition-all duration-300"></span>
+        </a>
+        <a href="#contact-section" class="font-label-md text-[11px] text-on-surface-variant hover:text-on-surface tracking-[0.1em] uppercase transition-colors relative group">
+          Contact Us
+          <span class="absolute -bottom-0.5 left-0 w-0 h-[2px] bg-primary-container group-hover:w-full transition-all duration-300"></span>
+        </a>
+      </div>
+
+      <!-- Right Side Actions -->
+      <div class="flex items-center gap-2">
+        <!-- WhatsApp Chat Button -->
+        <a href="https://wa.me/919958323089" target="_blank" rel="noopener noreferrer" class="hidden sm:inline-flex items-center gap-1 px-3 py-1.5 rounded-lg font-label-md text-[10px] font-bold tracking-[0.08em] uppercase shadow-lg hover:brightness-110 transition-all" style="background: #25D366; color: #fff;">
+          <svg class="w-[14px] h-[14px] fill-current" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WhatsApp
+        </a>
+
+        <a href="#order-terminal" class="hidden sm:inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-primary-container text-on-primary-container font-label-md text-[10px] font-bold tracking-[0.08em] uppercase shadow-lg hover:shadow-primary-container/40 hover:brightness-110 transition-all">
+          <span class="material-symbols-outlined text-[14px]">shopping_cart_checkout</span>
+          Buy Now
+        </a>
+
+        <!-- Mobile Hamburger -->
+        <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="lg:hidden flex items-center justify-center w-8 h-8 rounded-lg bg-surface-container/80 text-on-surface hover:bg-surface-container-high transition-colors">
+          <span class="material-symbols-outlined text-[18px]" id="hamburger-icon">menu</span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobile-menu" class="hidden lg:hidden w-full bg-surface-container-lowest/95 backdrop-blur-2xl border-b border-white/[0.06] px-4 py-3 space-y-1">
+      <a href="#" onclick="event.preventDefault(); toggleMobileMenu(); document.getElementById('explore-modal').classList.remove('hidden')" class="block px-4 py-2.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-label-md text-[11px] tracking-[0.1em] uppercase transition-colors cursor-pointer">
+        Explore
+      </a>
+      <a href="#acoustic-core" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-label-md text-[11px] tracking-[0.1em] uppercase transition-colors">
+        Service
+      </a>
+      <a href="#order-terminal" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-label-md text-[11px] tracking-[0.1em] uppercase transition-colors">
+        Price
+      </a>
+      <a href="#contact-section" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-label-md text-[11px] tracking-[0.1em] uppercase transition-colors">
+        Contact Us
+      </a>
+      <a href="https://wa.me/919958323089" target="_blank" rel="noopener noreferrer" onclick="toggleMobileMenu()" class="flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-center font-label-md text-[11px] font-bold tracking-[0.08em] uppercase mt-2" style="background: #25D366; color: #fff;">
+        <svg class="w-[14px] h-[14px] fill-current" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Chat on WhatsApp
+      </a>
+      <a href="#order-terminal" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-lg bg-primary-container text-on-primary-container text-center font-label-md text-[11px] font-bold tracking-[0.08em] uppercase">
+        Buy Now — $179
+      </a>
+    </div>
+  </header>
+
+  <!-- Navbar Scroll Opacity + Mobile Menu Script -->
+  <script>
+    // Navbar fades to ~35% opacity as user scrolls down
+    (function() {
+      const navbar = document.getElementById('main-navbar');
+      if (!navbar) return;
+
+      let ticking = false;
+      window.addEventListener('scroll', function() {
+        if (!ticking) {
+          requestAnimationFrame(function() {
+            const scrollY = window.scrollY || window.pageYOffset;
+            // Fade from 1.0 → 0.35 over the first 400px of scroll
+            const opacity = Math.max(0.35, 1 - (scrollY / 400) * 0.65);
+            navbar.style.opacity = opacity;
+
+            // On hover, temporarily restore full opacity
+            // (handled by CSS below via a class)
+            ticking = false;
+          });
+          ticking = true;
+        }
+      });
+
+      // Restore full opacity on hover
+      navbar.addEventListener('mouseenter', function() {
+        navbar.style.opacity = '1';
+        navbar.style.transitionDuration = '200ms';
+      });
+      navbar.addEventListener('mouseleave', function() {
+        const scrollY = window.scrollY || window.pageYOffset;
+        const opacity = Math.max(0.35, 1 - (scrollY / 400) * 0.65);
+        navbar.style.opacity = opacity;
+        navbar.style.transitionDuration = '500ms';
+      });
+    })();
+
+    // Mobile menu toggle
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-menu');
+      const icon = document.getElementById('hamburger-icon');
+      if (!menu || !icon) return;
+      const isHidden = menu.classList.contains('hidden');
+      if (isHidden) {
+        menu.classList.remove('hidden');
+        icon.textContent = 'close';
+      } else {
+        menu.classList.add('hidden');
+        icon.textContent = 'menu';
+      }
+    }
+    window.toggleMobileMenu = toggleMobileMenu;
+  </script>
+
+  <!-- ==================== COMPACT 3D HEADPHONE WIDGET (RIGHT SIDE) ==================== -->
+  <aside id="mini-3d-widget" class="fixed right-3 md:right-5 bottom-6 md:bottom-8 z-40 pointer-events-auto transition-opacity duration-500 ease-in-out">
+    <!-- Minimized Launch Pill Button -->
+    <button id="mini-3d-launcher" onclick="toggleMini3D(true)" class="hidden items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-surface-container/90 backdrop-blur-md border border-white/10 text-primary font-label-sm text-[10px] shadow-2xl hover:scale-105 transition-all group">
+      <span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-pulse"></span>
+      <span class="material-symbols-outlined text-[16px] group-hover:rotate-45 transition-transform">3d_rotation</span>
+      <span class="tracking-wider uppercase font-bold">3D</span>
+    </button>
+
+    <!-- Small 3D Card Viewport -->
+    <div id="mini-3d-card" class="relative bg-surface-container/85 backdrop-blur-xl border border-white/10 rounded-xl shadow-[0_12px_40px_rgba(0,0,0,0.7)] p-1.5 md:p-2 w-[140px] md:w-[160px] text-on-surface transition-all duration-300">
+      <!-- Card Header -->
+      <div class="flex items-center justify-between pb-1 border-b border-white/10">
+        <div class="flex items-center gap-1 font-label-sm text-tertiary">
+          <span class="w-1 h-1 rounded-full bg-primary-container animate-ping"></span>
+          <span class="font-bold tracking-wider text-[8px]">3D VIEW</span>
+        </div>
+        <button onclick="toggleMini3D(false)" class="w-4 h-4 rounded flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-white/10 transition-colors" title="Minimize">
+          <span class="material-symbols-outlined text-[12px]">close</span>
+        </button>
+      </div>
+
+      <!-- Realtime 3D Canvas Box -->
+      <div class="relative w-full h-28 md:h-32 my-1.5 rounded-lg bg-surface-container-lowest/80 overflow-hidden cursor-grab active:cursor-grabbing border border-white/5 flex items-center justify-center group">
+        <div id="threejs-container-ANIMATION_3" class="w-full h-full"></div>
+        <div class="absolute bottom-1 left-0 right-0 text-center pointer-events-none font-label-sm text-[7px] text-on-surface-variant/70 tracking-widest uppercase">
+          Drag to rotate
+        </div>
+      </div>
+
+      <!-- Color Swatches & Label -->
+      <div class="pt-0.5 flex items-center justify-between">
+        <div class="font-label-sm text-[7px] text-on-surface font-semibold truncate uppercase" id="mini-3d-finish-label">
+          Obsidian Black
+        </div>
+        <div class="flex items-center gap-1 shrink-0">
+          <button onclick="selectFinish('Matte Black', 0x18181b)" title="Matte Obsidian" class="w-2.5 h-2.5 rounded-full bg-[#18181b] ring-1 ring-white/30 hover:scale-125 transition-transform"></button>
+          <button onclick="selectFinish('Cyber Red', 0xff003c)" title="Cyber Crimson" class="w-2.5 h-2.5 rounded-full bg-[#ff003c] ring-1 ring-white/30 hover:scale-125 transition-transform"></button>
+          <button onclick="selectFinish('Cosmic Blue', 0x0a2540)" title="Cosmic Midnight" class="w-2.5 h-2.5 rounded-full bg-[#0a2540] ring-1 ring-white/30 hover:scale-125 transition-transform"></button>
+          <button onclick="selectFinish('Gunmetal Silver', 0x9ca3af)" title="Gunmetal Titanium" class="w-2.5 h-2.5 rounded-full bg-[#9ca3af] ring-1 ring-white/30 hover:scale-125 transition-transform"></button>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ==================== SCROLL ANIMATION SECTION ==================== -->
+  <section id="scroll-animation-section" class="scroll-animation-container">
+    <div class="animation-viewport" id="animation-viewport">
+      <canvas id="animation-canvas"></canvas>
+
+      <!-- Ambient HUD Overlay inside 3D Viewport -->
+      <div id="animation-hud" class="animation-hud">
+        <div class="hud-top">
+          <div class="hud-badge">
+            <span class="hud-dot"></span>
+            <span>SHIVHEADPHONES // 40MM BERYLLIUM ARCHITECTURE</span>
+          </div>
+          <div class="hud-sub">SYS.TELEMETRY: // 210-FRAME NEURAL EXPLODED VIEW</div>
+        </div>
+
+        <div class="hud-bottom">
+          <div class="hud-scroll-indicator">
+            <span class="material-symbols-outlined text-[20px] animate-bounce text-primary-container">keyboard_double_arrow_down</span>
+            <span>SCROLL TO EXPLORE ARCHITECTURE</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== SCROLL-TRIGGERED INFO BOXES ========== -->
+      <!-- BOX 1 — LEFT (appears first, alone) -->
+      <div class="scroll-info-box scroll-info-left" id="info-box-1" style="top: 18%; left: 2.5%;">
+        <div class="scroll-info-inner">
+          <div class="scroll-info-icon">🇮🇳</div>
+          <div class="scroll-info-title">Proudly Made in India</div>
+          <div class="scroll-info-text">ShivHeadphones is India's premium audio brand. Designed by Indian engineers for the world.</div>
+        </div>
+      </div>
+
+      <!-- BOX 2 — RIGHT (appears second, alone) -->
+      <div class="scroll-info-box scroll-info-right" id="info-box-2" style="top: 22%; right: 2.5%;">
+        <div class="scroll-info-inner">
+          <div class="scroll-info-icon">⚡</div>
+          <div class="scroll-info-title">65 Hours Battery Life</div>
+          <div class="scroll-info-text">Marathon playback with ASAP™ Fast Charge — get 10 hours of audio in just 10 minutes of charging.</div>
+        </div>
+      </div>
+
+      <!-- BOX 3 — CENTER (pops up in the middle, 30-40% opacity) -->
+      <div class="scroll-info-box scroll-info-center" id="info-box-3" style="top: 38%; left: 50%; transform: translateX(-50%) translateY(30px) scale(0.92);">
+        <div class="scroll-info-inner">
+          <div class="scroll-info-icon">🔊</div>
+          <div class="scroll-info-title">40mm Beryllium Drivers</div>
+          <div class="scroll-info-text">Ultra-rigid diaphragm delivers punchy bass and crystal-clear highs. Frequency range: 10Hz – 45kHz.</div>
+        </div>
+      </div>
+
+      <!-- BOX 4 — CENTER (pops up in the middle, 30-40% opacity) -->
+      <div class="scroll-info-box scroll-info-center" id="info-box-4" style="top: 38%; left: 50%; transform: translateX(-50%) translateY(30px) scale(0.92);">
+        <div class="scroll-info-inner">
+          <div class="scroll-info-icon">🤫</div>
+          <div class="scroll-info-title">Hybrid ANC – 40dB</div>
+          <div class="scroll-info-text">Quad-mic active noise cancellation silences jets, trains, and city noise. Dual feedforward + feedback architecture.</div>
+        </div>
+      </div>
+
+      <!-- BOX 5 — LEFT (appears late, no overlap with box 1) -->
+      <div class="scroll-info-box scroll-info-left" id="info-box-5" style="top: 68%; left: 2.5%;">
+        <div class="scroll-info-inner">
+          <div class="scroll-info-icon">🎧</div>
+          <div class="scroll-info-title">Premium Build Quality</div>
+          <div class="scroll-info-text">Protein leather cushions, brushed aluminum sliders, and aerospace-grade polycarbonate shell. Weighs just 268g.</div>
+        </div>
+      </div>
+
+      <!-- BOX 6 — RIGHT (appears late, no overlap with box 2) -->
+      <div class="scroll-info-box scroll-info-right" id="info-box-6" style="top: 65%; right: 2.5%;">
+        <div class="scroll-info-inner">
+          <div class="scroll-info-icon">📡</div>
+          <div class="scroll-info-title">Bluetooth 5.4 + LDAC</div>
+          <div class="scroll-info-text">Hi-Res wireless at 990kbps. Dual device multi-point pairing with 35ms ultra-low latency BEAST™ Mode for gaming.</div>
+        </div>
+      </div>
+
+      <!-- Minimal In-Frame Scroll Progress Bar -->
+      <div id="scroll-progress-track" class="scroll-progress-track" title="Click to jump">
+        <div id="scroll-progress-bar" class="scroll-progress-bar"></div>
+      </div>
+
+      <!-- Seamless Bottom Transition Gradient -->
+      <div class="animation-bottom-fade"></div>
+    </div>
+  </section>
+
+  <!-- ==================== REMAINING SECTIONS ADDED BELOW SCROLL ANIMATION ==================== -->
+  <main class="w-full bg-background relative z-20">
+    <div class="flex flex-col w-full text-on-surface">
+
+      <!-- ==================== 2. INTERACTIVE COLOR FINISH SELECTOR ==================== -->
+      <section class="w-full bg-surface-container-lowest py-space-2xl px-margin-mobile md:px-margin lg:px-margin-desktop">
+        <div class="max-w-[1440px] mx-auto">
+          <div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md mb-space-xl">
+            <div class="space-y-space-xs">
+              <div class="font-label-sm text-label-sm text-primary uppercase tracking-widest">// CMF FINISH MATRIX</div>
+              <h2 class="font-headline-lg text-headline-lg uppercase text-on-surface">Curated Cybernetic Finishes</h2>
+              <p class="font-body-md text-body-md text-on-surface-variant max-w-xl">
+                Choose your acoustic exoskeleton. Each variant receives a 7-stage vacuum PVD coating and micro-sandblasted anodic oxidation.
+              </p>
+            </div>
+            <div class="flex items-center gap-space-sm bg-surface-container-low px-space-md py-space-sm rounded-lg">
+              <span class="w-2.5 h-2.5 rounded-full bg-tertiary animate-pulse"></span>
+              <span class="font-label-sm text-label-sm text-on-surface font-semibold uppercase" id="finish-status-tag">ACTIVE FINISH: MATTE OBSIDIAN BLACK</span>
+            </div>
+          </div>
+
+          <!-- Color Selection Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter-lg">
+            <!-- Swatch 1: Matte Obsidian Black -->
+            <div class="finish-card cursor-pointer p-space-md bg-surface-container rounded-xl transition-all duration-300 hover:bg-surface-container-high relative overflow-hidden group shadow-lg bg-surface-container-high shadow-2xl" onclick="selectFinish('Matte Black', 0x18181b, 'READY IN WAREHOUSE • IMMEDIATE DISPATCH', 'bg-surface-variant', this)">
+              <div class="absolute top-3 right-3 px-2 py-0.5 rounded bg-primary-container text-on-primary-container font-label-sm text-label-sm uppercase font-bold">
+                Flagship Default
+              </div>
+              <div class="w-full aspect-[4/3] rounded-lg bg-surface-container-lowest flex items-center justify-center mb-space-md overflow-hidden relative">
+                <img alt="ShivHeadphones Matte Obsidian Black finish" class="w-4/5 h-4/5 object-contain group-hover:scale-110 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBay2xZJ_CLpDaRpJN3d51yVipwE-rX8wsfoYZwvHqgSCdoOBvr-z76jN44Rkmpli3ldYNXdx17cQZO1CZUriSZJFZvE9doNf2TS4vscaMma5tSYB4wCNXStJf6DlqlP4EsEYknTQ-afA9mFpeKh5lAJJG3OMnUhbtboAjw_9IdqNG7om12S0pStM4W4Ka-Huqjjyx-hBYEU7_7SWB7JlHznn26G8dgTRe0frBK8NCcOXHBVEqQ5q2FE9H9rQ5JHzGbffM" />
+                <div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-transparent"></div>
+              </div>
+              <div class="space-y-1">
+                <div class="flex items-center justify-between">
+                  <span class="font-headline-sm text-headline-sm font-bold text-on-surface">Matte Obsidian</span>
+                  <span class="w-5 h-5 rounded-full bg-[#18181b] shadow-inner ring-1 ring-white/20"></span>
+                </div>
+                <div class="font-label-sm text-label-sm text-tertiary">#18181B • PVD ANODIZED</div>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">Carbon black deep texture with zero gloss reflectance.</p>
+                <div class="pt-2 flex items-center gap-1 font-label-sm text-label-sm text-on-surface">
+                  <span class="material-symbols-outlined text-[16px] text-tertiary">inventory_2</span>
+                  <span>Stock: 85 Units in Vault</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Swatch 2: Cyber Crimson Red -->
+            <div class="finish-card cursor-pointer p-space-md bg-surface-container rounded-xl transition-all duration-300 hover:bg-surface-container-high relative overflow-hidden group" onclick="selectFinish('Cyber Red', 0xff003c, 'CRITICAL ALLOCATION • 14 UNITS LEFT', 'bg-primary-container', this)">
+              <div class="absolute top-3 right-3 px-2 py-0.5 rounded bg-error-container text-on-error-container font-label-sm text-label-sm uppercase font-bold">
+                14 Left
+              </div>
+              <div class="w-full aspect-[4/3] rounded-lg bg-surface-container-lowest flex items-center justify-center mb-space-md overflow-hidden relative">
+                <img class="w-4/5 h-4/5 object-contain group-hover:scale-110 transition-transform duration-300" alt="Cyber Crimson Red ShivHeadphones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2Qlb9X2pDPTbet2ut-mIB07vQgVd7xqlucVr8jYHc2xBPjXHKo0q9bQ9LI9hdSB4hguCvuJ5ZMuwT1Km_SQLd_p8rCm2rWBuCM65UO5AouE7aBdCw5MdjKRfTF2EKER_VZybrlyEB9h3JfscX1LiY9UMXAKfB6EWvmw9FvV7SKxq3ixWAENY-UCa6k0GhTl4-QGEzBBrFaqO5HYM73cPMkkE6V1t5FEa8uwpsDlUBQqnHfD2Ag69WJQ" />
+                <div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-transparent"></div>
+              </div>
+              <div class="space-y-1">
+                <div class="flex items-center justify-between">
+                  <span class="font-headline-sm text-headline-sm font-bold text-on-surface">Cyber Crimson</span>
+                  <span class="w-5 h-5 rounded-full bg-[#ff003c] shadow-inner ring-1 ring-white/20"></span>
+                </div>
+                <div class="font-label-sm text-label-sm text-primary">#FF003C • PULSE METALLIC</div>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">Aggressive racing red chassis with electric ruby accents.</p>
+                <div class="pt-2 flex items-center gap-1 font-label-sm text-label-sm text-error">
+                  <span class="material-symbols-outlined text-[16px]">priority_high</span>
+                  <span>Stock: 14 units left</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Swatch 3: Cosmic Midnight Blue -->
+            <div class="finish-card cursor-pointer p-space-md bg-surface-container rounded-xl transition-all duration-300 hover:bg-surface-container-high relative overflow-hidden group" onclick="selectFinish('Cosmic Blue', 0x0a2540, 'IN STOCK • GLOBAL ALLOCATION READY', 'bg-tertiary-container', this)">
+              <div class="absolute top-3 right-3 px-2 py-0.5 rounded bg-surface-container-highest text-on-surface font-label-sm text-label-sm uppercase font-bold">
+                Available
+              </div>
+              <div class="w-full aspect-[4/3] rounded-lg bg-surface-container-lowest flex items-center justify-center mb-space-md overflow-hidden relative">
+                <img class="w-4/5 h-4/5 object-contain group-hover:scale-110 transition-transform duration-300" alt="Cosmic Midnight Blue ShivHeadphones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAcEVkBCriD1Egf7PPXzkJWHEK_FkyUI9fhIzgzT_8FgR6y96eYVZP7cDhEDl9FlSbVzVxtAYZ3lM-wWDD2MczfYSiZbqGlo2USyKrxqzWlCOozyZ_rGaYt5mf0K_fhgSQZ2zEQ9j3Veo-wCP1br-deXiziLghJ8Qvl7bJgMaDqglTNDD0iLPx4lWRP5mSrXeMYdIf6b9pEBlKjqkSCuT2kPH4MqD5DYaUxC-wLdlF9PygXtMqd_cgUoQ" />
+                <div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-transparent"></div>
+              </div>
+              <div class="space-y-1">
+                <div class="flex items-center justify-between">
+                  <span class="font-headline-sm text-headline-sm font-bold text-on-surface">Cosmic Midnight</span>
+                  <span class="w-5 h-5 rounded-full bg-[#0a2540] shadow-inner ring-1 ring-white/20"></span>
+                </div>
+                <div class="font-label-sm text-label-sm text-tertiary">#0A2540 • STELLAR SHIFT</div>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">Ultra-deep oceanic hue inspired by stratospheric soundwaves.</p>
+                <div class="pt-2 flex items-center gap-1 font-label-sm text-label-sm text-on-surface">
+                  <span class="material-symbols-outlined text-[16px] text-tertiary">check_circle</span>
+                  <span>Stock: In Warehouse</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Swatch 4: Gunmetal Silver / Titanium -->
+            <div class="finish-card cursor-pointer p-space-md bg-surface-container rounded-xl transition-all duration-300 hover:bg-surface-container-high relative overflow-hidden group" onclick="selectFinish('Gunmetal Silver', 0x9ca3af, 'LIMITED COLLECTOR RUN • SERIAL NUMBERED', 'bg-surface-bright', this)">
+              <div class="absolute top-3 right-3 px-2 py-0.5 rounded bg-secondary text-on-secondary font-label-sm text-label-sm uppercase font-bold">
+                Limited
+              </div>
+              <div class="w-full aspect-[4/3] rounded-lg bg-surface-container-lowest flex items-center justify-center mb-space-md overflow-hidden relative">
+                <img class="w-4/5 h-4/5 object-contain group-hover:scale-110 transition-transform duration-300" alt="Gunmetal Titanium ShivHeadphones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUnROXiKTyF-PCwa0toh1yRKJTwxXZPNEd6ZSjOmsCigDI-G11DyZ6BflmjOC0k3jCYdQBQUSAtuhIkiEanA1XBXOrrHF7xUyYtpMoFYIwZ3c_D5xGbNoHr6T9JaWy77zaqqZtxf18poq6y-poswbYdJyD9XCJzTISHH9MluC2P2hBOan35hoTLM3qwVBsls8q9nJKkn6QMmDxWRFTCi1S6zF0fMn7-G9QEYpvOuNoYckiqbvUpjKDbg" />
+                <div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-transparent"></div>
+              </div>
+              <div class="space-y-1">
+                <div class="flex items-center justify-between">
+                  <span class="font-headline-sm text-headline-sm font-bold text-on-surface">Gunmetal Titanium</span>
+                  <span class="w-5 h-5 rounded-full bg-[#9ca3af] shadow-inner ring-1 ring-white/20"></span>
+                </div>
+                <div class="font-label-sm text-label-sm text-secondary">#9CA3AF • TITANIUM RAW</div>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">Exposed brushed titanium alloy frame with industrial etchings.</p>
+                <div class="pt-2 flex items-center gap-1 font-label-sm text-label-sm text-secondary">
+                  <span class="material-symbols-outlined text-[16px]">stars</span>
+                  <span>Limited Batch: 250 Units Global</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== 3. ACOUSTIC ARCHITECTURE & SOUND METRICS ==================== -->
+      <section class="w-full bg-surface-container-low py-space-3xl px-margin-mobile md:px-margin lg:px-margin-desktop relative" id="acoustic-core">
+        <div class="max-w-[1440px] mx-auto">
+          <!-- Section Title & Telemetry Header -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter-lg items-end mb-space-2xl">
+            <div class="lg:col-span-8 space-y-space-xs">
+              <div class="font-label-sm text-label-sm text-tertiary uppercase tracking-widest">// ACOUSTIC FREQUENCY LAB</div>
+              <h2 class="font-headline-lg text-headline-lg uppercase text-on-surface">Engineered for Hyper-Dynamic Fidelity</h2>
+              <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
+                Custom beryllium driver topology eliminates cone breakup distortion. Listen to your mixes with pure studio mastering authenticity.
+              </p>
+            </div>
+            <div class="lg:col-span-4 flex items-center justify-end">
+              <div class="flex items-center gap-3 px-space-md py-2 rounded-lg bg-surface-container">
+                <span class="material-symbols-outlined text-primary text-[20px]">hearing</span>
+                <div class="font-label-sm text-label-sm">
+                  <div class="text-on-surface font-bold">TOTAL HARMONIC DISTORTION</div>
+                  <div class="text-tertiary">&lt; 0.08% @ 1kHz, 94dB SPL</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Interactive Sound Equalizer Visualizer & Telemetry Grid -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter-lg items-stretch">
+            <!-- Left 7 Cols: Realtime Equalizer Studio -->
+            <div class="lg:col-span-7 bg-surface-container rounded-xl p-space-lg flex flex-col justify-between shadow-xl">
+              <div class="flex items-center justify-between pb-space-md">
+                <div>
+                  <div class="font-headline-sm text-headline-sm font-bold text-on-surface">Interactive Real-Time EQ Telemetry</div>
+                  <div class="font-label-sm text-label-sm text-outline">LIVE DSP AUDIO ENGINE // 32-BIT FLOATING POINT</div>
+                </div>
+                <div class="flex gap-1.5">
+                  <button class="px-2.5 py-1 rounded bg-surface-container-highest text-on-surface font-label-sm text-label-sm hover:bg-primary-container hover:text-on-primary-container transition-colors" onclick="setEqPreset('bass')">BASS BOOST</button>
+                  <button class="px-2.5 py-1 rounded bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm hover:bg-primary-container hover:text-on-primary-container transition-colors" onclick="setEqPreset('flat')">STUDIO FLAT</button>
+                  <button class="px-2.5 py-1 rounded bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm hover:bg-primary-container hover:text-on-primary-container transition-colors" onclick="setEqPreset('spatial')">3D CINEMA</button>
+                </div>
+              </div>
+
+              <!-- Dynamic SVG Waveform Display -->
+              <div class="w-full h-44 bg-surface-container-lowest rounded-lg p-4 relative overflow-hidden flex flex-col justify-between my-space-md">
+                <div class="flex items-center justify-between text-label-sm font-label-sm text-outline">
+                  <span>+12 dB</span>
+                  <span class="text-primary font-bold">DSP RESPONSE CURVE: <span id="active-eq-title">HEAVY SUB-BASS REINFORCEMENT</span></span>
+                  <span>-12 dB</span>
+                </div>
+                <!-- SVG Multi-Band Frequency Bars -->
+                <svg class="w-full h-24 overflow-visible" preserveaspectratio="none" viewbox="0 0 400 100">
+                  <line class="text-surface-variant" stroke="currentColor" stroke-dasharray="2 4" stroke-width="0.5" x1="0" x2="400" y1="20" y2="20"></line>
+                  <line class="text-outline-variant" stroke="currentColor" stroke-width="0.8" x1="0" x2="400" y1="50" y2="50"></line>
+                  <line class="text-surface-variant" stroke="currentColor" stroke-dasharray="2 4" stroke-width="0.5" x1="0" x2="400" y1="80" y2="80"></line>
+                  <path class="text-primary" d="M 0,60 Q 50,15 100,25 T 200,45 T 300,30 T 400,55" fill="none" id="eq-curve" stroke="currentColor" stroke-width="3"></path>
+                  <path class="text-primary/10" d="M 0,60 Q 50,15 100,25 T 200,45 T 300,30 T 400,55 L 400,100 L 0,100 Z" fill="currentColor" id="eq-area"></path>
+                </svg>
+                <!-- Freq labels -->
+                <div class="flex justify-between font-label-sm text-label-sm text-on-surface-variant pt-1">
+                  <span>20 Hz (Sub)</span>
+                  <span>250 Hz (Low)</span>
+                  <span>1 kHz (Mid)</span>
+                  <span>4 kHz (Presence)</span>
+                  <span>20 kHz (Air)</span>
+                </div>
+              </div>
+
+              <!-- Scrubbable Sliders -->
+              <div class="grid grid-cols-4 gap-space-sm pt-space-xs">
+                <div class="space-y-1">
+                  <div class="flex justify-between font-label-sm text-label-sm">
+                    <span class="text-on-surface">Sub 32Hz</span>
+                    <span class="text-primary font-bold" id="val-bass">+8dB</span>
+                  </div>
+                  <input class="w-full accent-primary-container h-1 bg-surface-container-low rounded-lg appearance-none cursor-pointer" max="12" min="-12" oninput="document.getElementById('val-bass').innerText = (this.value > 0 ? '+' : '') + this.value + 'dB'" type="range" value="8" />
+                </div>
+                <div class="space-y-1">
+                  <div class="flex justify-between font-label-sm text-label-sm">
+                    <span class="text-on-surface">Mid 1kHz</span>
+                    <span class="text-tertiary font-bold" id="val-mid">+2dB</span>
+                  </div>
+                  <input class="w-full accent-tertiary h-1 bg-surface-container-low rounded-lg appearance-none cursor-pointer" max="12" min="-12" oninput="document.getElementById('val-mid').innerText = (this.value > 0 ? '+' : '') + this.value + 'dB'" type="range" value="2" />
+                </div>
+                <div class="space-y-1">
+                  <div class="flex justify-between font-label-sm text-label-sm">
+                    <span class="text-on-surface">Treble 18k</span>
+                    <span class="text-secondary font-bold" id="val-treble">+4dB</span>
+                  </div>
+                  <input class="w-full accent-secondary-container h-1 bg-surface-container-low rounded-lg appearance-none cursor-pointer" max="12" min="-12" oninput="document.getElementById('val-treble').innerText = (this.value > 0 ? '+' : '') + this.value + 'dB'" type="range" value="4" />
+                </div>
+                <div class="space-y-1">
+                  <div class="flex justify-between font-label-sm text-label-sm">
+                    <span class="text-on-surface">360° Stage</span>
+                    <span class="text-on-surface font-bold" id="val-spatial">WIDE</span>
+                  </div>
+                  <input class="w-full accent-primary h-1 bg-surface-container-low rounded-lg appearance-none cursor-pointer" max="3" min="1" oninput="const s=['NARROW','BALANCED','ULTRA WIDE']; document.getElementById('val-spatial').innerText = s[this.value-1]" type="range" value="3" />
+                </div>
+              </div>
+            </div>
+
+            <!-- Right 5 Cols: Key Telemetry Stat HUD Grid -->
+            <div class="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+              <div class="p-space-md bg-surface-container rounded-xl flex flex-col justify-between shadow-md">
+                <div class="flex items-center justify-between">
+                  <span class="material-symbols-outlined text-secondary text-[24px]">battery_saver</span>
+                  <span class="font-label-sm text-label-sm text-outline">STANAG-CERT</span>
+                </div>
+                <div class="my-space-sm">
+                  <div class="font-display-lg text-display-lg text-on-surface leading-none font-extrabold">65<span class="text-secondary">h</span></div>
+                  <div class="font-label-md text-label-md font-bold text-on-surface mt-1 uppercase">Playback Engine</div>
+                </div>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">
+                  High-density lithium polymer cell. ASAP™ Fast Charge gives 10 hours of uncompromised audio in 10 minutes.
+                </p>
+              </div>
+
+              <div class="p-space-md bg-surface-container rounded-xl flex flex-col justify-between shadow-md">
+                <div class="flex items-center justify-between">
+                  <span class="material-symbols-outlined text-primary text-[24px]">graphic_eq</span>
+                  <span class="font-label-sm text-label-sm text-outline">ANR-HYBRID</span>
+                </div>
+                <div class="my-space-sm">
+                  <div class="font-display-lg text-display-lg text-on-surface leading-none font-extrabold">40<span class="text-primary">dB</span></div>
+                  <div class="font-label-md text-label-md font-bold text-on-surface mt-1 uppercase">Noise Eradication</div>
+                </div>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">
+                  Quad micro-sensing array calculates ambient phase vectors 50,000 times per second for instant silence.
+                </p>
+              </div>
+
+              <div class="p-space-md bg-surface-container rounded-xl flex flex-col justify-between shadow-md">
+                <div class="flex items-center justify-between">
+                  <span class="material-symbols-outlined text-tertiary text-[24px]">speaker</span>
+                  <span class="font-label-sm text-label-sm text-outline">PURE BERYLLIUM</span>
+                </div>
+                <div class="my-space-sm">
+                  <div class="font-display-lg text-display-lg text-on-surface leading-none font-extrabold">40<span class="text-tertiary">mm</span></div>
+                  <div class="font-label-md text-label-md font-bold text-on-surface mt-1 uppercase">Signature Bass Drivers</div>
+                </div>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">
+                  Ultra-light, ultra-rigid diaphragm design for punchy sub-bass without masking crisp vocal frequencies.
+                </p>
+              </div>
+
+              <div class="p-space-md bg-surface-container rounded-xl flex flex-col justify-between shadow-md">
+                <div class="flex items-center justify-between">
+                  <span class="material-symbols-outlined text-primary-container text-[24px]">sports_esports</span>
+                  <span class="font-label-sm text-label-sm text-outline">BEAST™ MODE</span>
+                </div>
+                <div class="my-space-sm">
+                  <div class="font-display-lg text-display-lg text-on-surface leading-none font-extrabold">35<span class="text-primary-container">ms</span></div>
+                  <div class="font-label-md text-label-md font-bold text-on-surface mt-1 uppercase">Ultra-Low Latency</div>
+                </div>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">
+                  Frame-accurate sound transmission for competitive gaming and pristine real-time sync with video broadcasts.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== 4. SOUND MODE & ANC SIMULATOR ==================== -->
+      <section class="w-full bg-surface-container-lowest py-space-3xl px-margin-mobile md:px-margin lg:px-margin-desktop">
+        <div class="max-w-[1440px] mx-auto">
+          <div class="text-center max-w-3xl mx-auto mb-space-2xl space-y-space-xs">
+            <div class="font-label-sm text-label-sm text-primary uppercase tracking-widest">// ACOUSTIC ISOLATION LAB</div>
+            <h2 class="font-headline-lg text-headline-lg uppercase text-on-surface">Experience Hybrid ANC In Realtime</h2>
+            <p class="font-body-lg text-body-lg text-on-surface-variant">
+              Toggle between the three proprietary listening states to observe live soundwave suppression telemetry.
+            </p>
+          </div>
+
+          <!-- Mode Control Bar -->
+          <div class="flex flex-wrap items-center justify-center gap-space-xs p-1.5 bg-surface-container rounded-full max-w-2xl mx-auto mb-space-xl">
+            <button class="anc-tab-btn flex-1 py-3 px-space-md rounded-full font-label-md text-label-md font-bold tracking-wide uppercase transition-all bg-primary-container text-on-primary-container shadow-md" id="btn-mode-hybrid" onclick="switchAncMode('hybrid')">
+              <span class="material-symbols-outlined text-[18px] align-middle mr-1">shield</span> Hybrid ANC ON
+            </button>
+            <button class="anc-tab-btn flex-1 py-3 px-space-md rounded-full font-label-md text-label-md font-medium tracking-wide uppercase transition-all text-on-surface-variant hover:text-on-surface" id="btn-mode-ambient" onclick="switchAncMode('ambient')">
+              <span class="material-symbols-outlined text-[18px] align-middle mr-1">hearing</span> Ambient Transparency
+            </button>
+            <button class="anc-tab-btn flex-1 py-3 px-space-md rounded-full font-label-md text-label-md font-medium tracking-wide uppercase transition-all text-on-surface-variant hover:text-on-surface" id="btn-mode-spatial" onclick="switchAncMode('spatial')">
+              <span class="material-symbols-outlined text-[18px] align-middle mr-1">spatial_audio</span> Shiv 3D Spatial
+            </button>
+          </div>
+
+          <!-- Live Simulator HUD Canvas -->
+          <div class="bg-surface-container-low rounded-xl p-space-lg md:p-space-2xl relative overflow-hidden shadow-2xl">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter-lg items-center">
+              <!-- Mode Details & Waveform Visualizer -->
+              <div class="lg:col-span-7 space-y-space-md">
+                <div class="flex items-center gap-space-xs font-label-sm text-label-sm text-outline">
+                  <span>MIC ARRAY: DUAL FEEDFORWARD + FEEDBACK</span>
+                  <span>•</span>
+                  <span class="text-tertiary">SAMPLING: 192KHZ</span>
+                </div>
+                <div class="space-y-space-xs">
+                  <h3 class="font-headline-lg text-headline-lg text-on-surface uppercase" id="anc-mode-title">Hybrid ANC Active: Total Silence Zone</h3>
+                  <p class="font-body-md text-body-md text-on-surface-variant" id="anc-mode-desc">
+                    Dual inverted anti-noise signals suppress jet rumble, urban subway roar, and air conditioning drones down by up to 40dB. You enter a serene vacuum of pure sound.
+                  </p>
+                </div>
+
+                <!-- Animated Waveform Visualizer Container -->
+                <div class="p-space-md bg-surface-container rounded-lg space-y-3">
+                  <div class="flex items-center justify-between text-label-sm font-label-sm">
+                    <span class="text-on-surface-variant">EXTERNAL AMBIENT NOISE WAVE (INPUT)</span>
+                    <span class="px-2 py-0.5 rounded bg-primary-container text-on-primary-container font-bold" id="anc-attenuation-badge">-40 dB SUPPRESSION</span>
+                  </div>
+                  <div class="h-20 w-full bg-surface-container-lowest rounded flex items-center justify-center px-4 overflow-hidden relative">
+                    <svg class="w-full h-full" id="simulation-svg" preserveaspectratio="none" viewbox="0 0 500 80">
+                      <path class="text-primary-container transition-all duration-500" d="M 0 40 Q 25 10 50 40 T 100 40 T 150 40 T 200 40 T 250 40 T 300 40 T 350 40 T 400 40 T 450 40 T 500 40" fill="none" id="anti-wave" stroke="currentColor" stroke-width="2"></path>
+                      <path class="text-tertiary transition-all duration-500" d="M 0 40 Q 25 39 50 40 T 100 40 T 150 40 T 200 40 T 250 40 T 300 40 T 350 40 T 400 40 T 450 40 T 500 40" fill="none" id="result-wave" stroke="currentColor" stroke-width="1.5"></path>
+                    </svg>
+                  </div>
+                  <div class="flex items-center justify-between font-label-sm text-label-sm text-outline">
+                    <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-primary-container"></span> Ambient Anti-Phase Injected</span>
+                    <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-tertiary"></span> Residual Transmitted Amplitude</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Decibel Meter & Acoustic Specs -->
+              <div class="lg:col-span-5 bg-surface-container rounded-xl p-space-lg space-y-space-md">
+                <div class="flex items-center justify-between pb-space-xs">
+                  <span class="font-label-sm text-label-sm text-on-surface uppercase font-bold">Sound Pressure Telemetry</span>
+                  <span class="font-label-sm text-label-sm text-primary font-mono" id="spl-meter">32 dB SPL</span>
+                </div>
+                <div class="space-y-2">
+                  <div class="flex justify-between font-label-sm text-label-sm text-outline">
+                    <span>0dB (Studio Whisper)</span>
+                    <span>40dB (Library)</span>
+                    <span>85dB (Subway)</span>
+                  </div>
+                  <div class="h-3 w-full bg-surface-container-lowest rounded-full overflow-hidden flex">
+                    <div class="h-full bg-gradient-to-r from-tertiary via-secondary-container to-primary transition-all duration-500 w-[28%]" id="spl-fill"></div>
+                  </div>
+                </div>
+                <div class="grid grid-cols-2 gap-space-sm pt-space-xs font-label-sm text-label-sm">
+                  <div class="p-3 bg-surface-container-low rounded-lg">
+                    <div class="text-outline">WIND NOISE SHIELD</div>
+                    <div class="text-on-surface font-bold mt-1">Dual Mesh Diverter</div>
+                  </div>
+                  <div class="p-3 bg-surface-container-low rounded-lg">
+                    <div class="text-outline">PASSTHROUGH LAG</div>
+                    <div class="text-tertiary font-bold mt-1">&lt; 1.2ms Realtime</div>
+                  </div>
+                  <div class="p-3 bg-surface-container-low rounded-lg">
+                    <div class="text-outline">ALGORITHM</div>
+                    <div class="text-secondary font-bold mt-1">ENx™ Quad Mics</div>
+                  </div>
+                  <div class="p-3 bg-surface-container-low rounded-lg">
+                    <div class="text-outline">STAGE DEPTH</div>
+                    <div class="text-primary font-bold mt-1" id="stage-depth-metric">360° Fixed Phase</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== 5. HARDWARE BLUEPRINT & EXPLODED ARCHITECTURE ==================== -->
+      <section class="w-full bg-surface-container-low py-space-3xl px-margin-mobile md:px-margin lg:px-margin-desktop">
+        <div class="max-w-[1440px] mx-auto">
+          <div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md mb-space-2xl">
+            <div class="space-y-space-xs">
+              <div class="font-label-sm text-label-sm text-tertiary uppercase tracking-widest">// INTERNAL COMPONENT TOPOLOGY</div>
+              <h2 class="font-headline-lg text-headline-lg uppercase text-on-surface">Exploded Hardware Architecture</h2>
+              <p class="font-body-md text-body-md text-on-surface-variant max-w-xl">
+                Precision engineering down to 5-micron tolerances. Every component was designed from the ground up for acoustic purity and military-grade longevity.
+              </p>
+            </div>
+            <div class="flex items-center gap-space-sm font-label-sm text-label-sm text-outline">
+              <span>DWG REF: SHIV-HEADPHONES-PRO-X</span>
+              <span>•</span>
+              <span class="text-primary font-bold">REVISION 4.2</span>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter-lg">
+            <!-- Module 1: Drivers -->
+            <div class="p-space-lg bg-surface-container rounded-xl space-y-space-md relative overflow-hidden shadow-lg group hover:bg-surface-container-high transition-colors">
+              <div class="flex items-center justify-between">
+                <span class="material-symbols-outlined text-primary text-[28px]">lens</span>
+                <span class="font-label-sm text-label-sm text-outline">MODULE #01</span>
+              </div>
+              <div class="h-36 rounded-lg bg-surface-container-lowest flex items-center justify-center p-3 relative overflow-hidden">
+                <img class="w-full h-full object-contain" alt="Technical exploded diagram of a 40mm beryllium headphone driver" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvIT5ZzgcqE19_6yVIHBH5dbHuUT_sR3N_4Q7nF9CZcw2LStkzBJNZGaoJATOUVwlhA0oxfUyQTKCUuuK1bkzT8UOg27e5HssSjks6IZW3iob7C3FYGjJikiyLUHoNnHXbCPJm_DUOSaHyJKvylooWgHFdY6NAtMuMvZD_RHhCsYsak7-a47vLli_kOK_QlqrDJCKz5op43QQsI4qtEj0MS9JEu_BqQMymAM5V6B2ELFcl9OQ6iMMsag" />
+              </div>
+              <div>
+                <div class="font-headline-sm text-headline-sm font-bold text-on-surface">40mm Beryllium Driver</div>
+                <p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+                  Ultra-thin beryllium diaphragm suspended in an acoustic damper chamber eliminates harmonic interference in high octaves.
+                </p>
+              </div>
+              <div class="font-label-sm text-label-sm text-tertiary pt-2">
+                RESPONSE: 10HZ - 45,000HZ
+              </div>
+            </div>
+
+            <!-- Module 2: Mic Array & ENx Tech -->
+            <div class="p-space-lg bg-surface-container rounded-xl space-y-space-md relative overflow-hidden shadow-lg group hover:bg-surface-container-high transition-colors">
+              <div class="flex items-center justify-between">
+                <span class="material-symbols-outlined text-tertiary text-[28px]">mic_double</span>
+                <span class="font-label-sm text-label-sm text-outline">MODULE #02</span>
+              </div>
+              <div class="h-36 rounded-lg bg-surface-container-lowest flex items-center justify-center p-3 relative overflow-hidden">
+                <img class="w-full h-full object-contain" alt="Technical blueprint diagram showing dual feedforward microphones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7hojLvr80mR-Kkt4hvvi83e5aO4hZ-hv0tVDLuzS9nsukv0SYMuj9mRigr5zQ9uB6toWQLXKd2K0wpq9yNYbOg4iDb6Td1kj-ZAjAM2JY-8LN-1JzMX2kJlOiZgrLl3oWFt5YFloeJ_ThfY0ojpnaaW5zpcuFGge0laKqpRSrYWqd7FvIt_nrRhWuj4r9bhhdQ65-3DRYJR6hOxr6_bGnZIK7C4q6YVumZiDwnOBPW4X6p2k-PUhuQw" />
+              </div>
+              <div>
+                <div class="font-headline-sm text-headline-sm font-bold text-on-surface">ENx™ Quad Mic Array</div>
+                <p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+                  AI-assisted beamforming isolates human vocal frequencies while suppressing up to 98% of ambient wind noise during voice calls.
+                </p>
+              </div>
+              <div class="font-label-sm text-label-sm text-primary pt-2">
+                NOISE REDUCTION: -38DB CALLS
+              </div>
+            </div>
+
+            <!-- Module 3: Wireless SoC & LDAC Codec -->
+            <div class="p-space-lg bg-surface-container rounded-xl space-y-space-md relative overflow-hidden shadow-lg group hover:bg-surface-container-high transition-colors">
+              <div class="flex items-center justify-between">
+                <span class="material-symbols-outlined text-secondary text-[28px]">memory</span>
+                <span class="font-label-sm text-label-sm text-outline">MODULE #03</span>
+              </div>
+              <div class="h-36 rounded-lg bg-surface-container-lowest flex items-center justify-center p-3 relative overflow-hidden">
+                <img class="w-full h-full object-contain" alt="Detailed macro view of chipset" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_aoq9KsS3Feybc1bPuxC4KaDjmOcmJSBHTixLg25Zvtd5Anv7pqFmyaGB3m68iSGu8BwCWW2Db8Ms6eNgpoYoQVSAFEiz9V5f2Q9LDc4pSwz2oxrp0d5x9M-koo9-paYQeALue6P6P3mNb-zzPedrX7pXNht64m7yhV8QQZJgHy7y7gVNZFQOwbFyJJsxdKiArSdqSrnxBESmWB7z8VOoJzNGCM6m-160aVZoBzuh5Qg-ySrXfm-_2A" />
+              </div>
+              <div>
+                <div class="font-headline-sm text-headline-sm font-bold text-on-surface">Bluetooth 5.4 + LDAC</div>
+                <p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+                  Supports 24-bit/96kHz high-resolution audio streaming with dual device multi-point fast pairing and zero signal drops.
+                </p>
+              </div>
+              <div class="font-label-sm text-label-sm text-secondary pt-2">
+                BANDWIDTH: 990KBPS HI-RES
+              </div>
+            </div>
+
+            <!-- Module 4: Ergonomic Chassis -->
+            <div class="p-space-lg bg-surface-container rounded-xl space-y-space-md relative overflow-hidden shadow-lg group hover:bg-surface-container-high transition-colors">
+              <div class="flex items-center justify-between">
+                <span class="material-symbols-outlined text-primary-container text-[28px]">headphones</span>
+                <span class="font-label-sm text-label-sm text-outline">MODULE #04</span>
+              </div>
+              <div class="h-36 rounded-lg bg-surface-container-lowest flex items-center justify-center p-3 relative overflow-hidden">
+                <img class="w-full h-full object-contain" alt="Cutaway technical rendering showing soft memory foam earpad layers" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXjAgqF5kzkgrKRV1UD0fAE0NKYgKTIrmqsfySlGG_2s5aKJZkw9FeJJ7mJq9ARfzo0cF7gdXSMbmMVWpNk-E8d8ErPnjT0jc271h5aGbxFuDiq6ue1cbki7kw3Dpv7vulcBPxtuAq3Y-aI3o1nvAVTi2c2J4NlHKwVCRuGaozDB4KPPgnQ93pkvJ8wfu8xp2viFspQ8ez5AbGM3zhFKxDcilhfDJvkw6RGRa6Ch-hWX73jYJZh2q40g" />
+              </div>
+              <div>
+                <div class="font-headline-sm text-headline-sm font-bold text-on-surface">Padded Ergonomic Spine</div>
+                <p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+                  Precision stepless steel sliders and plush slow-rebound memory foam cushions lined in breathable protein leather.
+                </p>
+              </div>
+              <div class="font-label-sm text-label-sm text-primary-container pt-2">
+                WEIGHT: 268G FEATHERWEIGHT
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== 6. BUY NOW / PRE-ORDER TERMINAL & ACCESSORIES ==================== -->
+      <section class="w-full bg-surface-container-lowest py-space-3xl px-margin-mobile md:px-margin lg:px-margin-desktop relative" id="order-terminal">
+        <div class="max-w-[1440px] mx-auto">
+          <div class="bg-surface-container rounded-xl p-space-lg md:p-space-2xl shadow-2xl relative overflow-hidden">
+            <!-- Background Ambient Accent Glow -->
+            <div class="absolute -right-20 -bottom-20 w-96 h-96 rounded-full bg-primary-container/10 blur-3xl pointer-events-none"></div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter-lg items-center">
+              <!-- Left 7 Cols: Offer Detail & Hardware Bundle -->
+              <div class="lg:col-span-7 space-y-space-lg">
+                <div class="space-y-space-xs">
+                  <div class="inline-flex items-center gap-2 px-3 py-1 rounded bg-surface-container-highest text-primary font-label-sm text-label-sm font-bold uppercase">
+                    <span class="w-2 h-2 rounded-full bg-primary animate-ping"></span>
+                    EXCLUSIVE GLOBAL LAUNCH ALLOCATION
+                  </div>
+                  <h2 class="font-headline-lg text-headline-lg uppercase text-on-surface">
+                    Pre-Order ShivHeadphones 3D Pro
+                  </h2>
+                  <p class="font-body-md text-body-md text-on-surface-variant">
+                    Claim your early-bird reservation from Batch 01. Every pre-order includes our Collector Armor Package at zero additional fee.
+                  </p>
+                </div>
+
+                <!-- Price Breakdown Tag -->
+                <div class="flex items-baseline gap-space-md p-space-md bg-surface-container-low rounded-xl">
+                  <div>
+                    <span class="font-label-sm text-label-sm text-outline block uppercase">LAUNCH SPECIAL PRICE</span>
+                    <span class="font-display-lg text-display-lg text-on-surface font-extrabold">$179</span>
+                  </div>
+                  <div class="space-y-0.5">
+                    <span class="font-body-md text-body-md text-outline line-through">$249 MSRP</span>
+                    <span class="block px-2 py-0.5 rounded bg-primary-container text-on-primary-container font-label-sm text-label-sm font-bold uppercase">SAVE 28% ($70 OFF)</span>
+                  </div>
+                </div>
+
+                <!-- Included Cyber Accessories Bundle -->
+                <div class="space-y-space-xs">
+                  <div class="font-label-sm text-label-sm text-on-surface font-bold uppercase tracking-wider">
+                    COMPLIMENTARY ACCESSORIES IN THE BOX (VALUE $65):
+                  </div>
+                  <div class="grid grid-cols-1 sm:grid-cols-3 gap-space-sm">
+                    <div class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2.5">
+                      <span class="material-symbols-outlined text-tertiary text-[22px]">cloud_download</span>
+                      <div class="font-label-sm text-label-sm">
+                        <div class="text-on-surface font-bold">Hard-Shell EVA Case</div>
+                        <div class="text-on-surface-variant">Shockproof Velvet Liner</div>
+                      </div>
+                    </div>
+                    <div class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2.5">
+                      <span class="material-symbols-outlined text-secondary text-[22px]">cable</span>
+                      <div class="font-label-sm text-label-sm">
+                        <div class="text-on-surface font-bold">Braided 3.5mm Aux</div>
+                        <div class="text-on-surface-variant">Gold-Plated Oxygen-Free</div>
+                      </div>
+                    </div>
+                    <div class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2.5">
+                      <span class="material-symbols-outlined text-primary text-[22px]">bolt</span>
+                      <div class="font-label-sm text-label-sm">
+                        <div class="text-on-surface font-bold">USB-C ASAP™ Cable</div>
+                        <div class="text-on-surface-variant">High-Amperage Fast-Sync</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Trust Badges -->
+                <div class="flex flex-wrap items-center gap-space-md pt-space-xs font-label-sm text-label-sm text-on-surface-variant">
+                  <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-tertiary text-[18px]">verified</span> 1-Year ShivHeadphones Warranty</span>
+                  <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-tertiary text-[18px]">local_shipping</span> Free Worldwide Express Shipping</span>
+                  <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-tertiary text-[18px]">cached</span> 15-Day Return Guarantee</span>
+                </div>
+              </div>
+
+              <!-- Right 5 Cols: Interactive Checkout Terminal -->
+              <div class="lg:col-span-5 bg-surface-container-low rounded-xl p-space-lg space-y-space-md shadow-xl">
+                <div class="flex items-center justify-between pb-space-xs">
+                  <span class="font-label-md text-label-md font-bold text-on-surface uppercase">SECURE ORDER DISPATCH</span>
+                  <span class="font-label-sm text-label-sm text-tertiary font-mono">TLS 256-BIT SECURE</span>
+                </div>
+
+                <div class="flex items-center gap-space-md p-space-sm bg-surface-container rounded-lg">
+                  <div class="w-16 h-16 rounded bg-surface-container-lowest flex items-center justify-center p-1 overflow-hidden shrink-0">
+                    <img alt="Selected ShivHeadphones" class="w-full h-full object-contain" id="checkout-thumb" src="https://lh3.googleusercontent.com/aida-public/AB6AXuClBVWa1XzcmvAroIzDSEoDo4MuZ2V57pCB93pFQM3bqdmbysmKrSrEg2MkAuczA4O5Ez37fNISE4nu3UV0REPKuvA1ap4A_CYzjZ7Baxg2vF3Stu8NyoUhaxc7SY6StCTuoebjSpCp7FAS6dDktJW1OwsqBnRZ2spllfbg5z66PmTz_urpJ_W2ugms9VeSzug23pwypmDV22o8I0SQEWbMXa7eol0FZ6Iq5u0XDyvWaBjOzm9uQ3ZwTpjIQnHS0WhJFsc" />
+                  </div>
+                  <div class="min-w-0">
+                    <div class="font-label-md text-label-md font-bold text-on-surface truncate" id="checkout-title">SHIVHEADPHONES 3D PRO</div>
+                    <div class="font-label-sm text-label-sm text-tertiary truncate" id="checkout-finish-desc">Finish: Matte Obsidian Black</div>
+                    <div class="font-label-sm text-label-sm text-on-surface-variant">Est. Ship Date: In 48 Hours</div>
+                  </div>
+                </div>
+
+                <!-- Pre-order Form Inputs -->
+                <div class="space-y-space-xs">
+                  <label class="font-label-sm text-label-sm text-on-surface-variant uppercase">Delivery Email (For Tracking Telemetry)</label>
+                  <input class="w-full px-space-md py-2.5 rounded-lg bg-surface-container text-on-surface font-label-md text-label-md placeholder:text-outline focus:outline-none focus:ring-1 focus:ring-primary-container" placeholder="cyberpunk@audiophile.io" type="email" />
+                </div>
+                <div class="space-y-space-xs">
+                  <label class="font-label-sm text-label-sm text-on-surface-variant uppercase">Shipping Region</label>
+                  <select class="w-full px-space-md py-2.5 rounded-lg bg-surface-container text-on-surface font-label-md text-label-md focus:outline-none focus:ring-1 focus:ring-primary-container">
+                    <option>United States &amp; Canada (Free Express 2-Day)</option>
+                    <option>European Union &amp; UK (Free Air Cargo)</option>
+                    <option>India &amp; Southeast Asia (Priority Air Transit)</option>
+                    <option>Global International (Express Courier)</option>
+                  </select>
+                </div>
+
+                <div class="space-y-space-xs pt-space-xs">
+                  <button class="w-full py-3.5 px-space-md rounded-lg bg-primary-container text-on-primary-container font-label-md text-label-md font-bold uppercase tracking-wider shadow-lg hover:shadow-primary-container/50 transition-all flex items-center justify-center gap-2" onclick="alert('ShivHeadphones 3D Pro added to cart! Proceeding to checkout...')" type="button">
+                    <span class="material-symbols-outlined text-[20px]">shopping_cart_checkout</span>
+                    INSTANT BUY • $179
+                  </button>
+                  <button class="w-full py-3 px-space-md rounded-lg bg-surface-container text-on-surface font-label-md text-label-md font-bold uppercase tracking-wider hover:bg-surface-container-high transition-colors flex items-center justify-center gap-2" onclick="alert('Item reserved in your audio syndicate basket!')" type="button">
+                    <span class="material-symbols-outlined text-[20px]">add_shopping_cart</span>
+                    ADD TO CART
+                  </button>
+                </div>
+                <div class="text-center font-label-sm text-label-sm text-outline pt-1">
+                  Zero hassle return policy. No questions asked.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="w-full bg-surface-container-lowest text-on-surface-variant relative z-20">
+    <div class="w-full px-margin-mobile md:px-margin lg:px-margin-desktop py-space-3xl">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-gutter-lg pb-space-2xl">
+        <div class="lg:col-span-2 space-y-space-md">
+          <div class="flex items-center gap-space-xs">
+            <span class="material-symbols-outlined text-primary-container text-[30px]">headphones</span>
+            <span class="font-headline-md text-headline-md tracking-tighter text-on-surface uppercase">Shiv<span class="text-primary-container">H</span>eadphones</span>
+            <span class="ml-1 font-label-sm text-label-sm text-primary tracking-widest uppercase">AUDIO LABS</span>
+          </div>
+          <p class="font-body-sm text-body-sm text-on-surface-variant max-w-md">
+            Next-generation cybernetic acoustics engineered for audiophiles, producers, and sonic architects. Monolithic hardware driven by 50dB Hybrid Active Noise Cancellation and Beryllium driver precision.
+          </p>
+          <div class="flex items-center gap-space-sm pt-space-xs">
+            <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container-low">
+              <span class="material-symbols-outlined text-tertiary text-[18px]">verified_user</span>
+              <span class="font-label-sm text-label-sm text-on-surface uppercase font-semibold">2-Year Zero-Fault Warranty</span>
+            </div>
+            <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container-low">
+              <span class="material-symbols-outlined text-secondary text-[18px]">high_quality</span>
+              <span class="font-label-sm text-label-sm text-on-surface uppercase font-semibold">Hi-Res Wireless Certified</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-space-sm">
+          <div class="font-label-lg text-label-lg text-on-surface uppercase font-bold tracking-wider">Architecture</div>
+          <ul class="space-y-2 font-body-sm text-body-sm">
+            <li class="hover:text-on-surface transition-colors cursor-pointer">Nirvana Ion Driver Core</li>
+            <li class="hover:text-on-surface transition-colors cursor-pointer">Beryllium Acoustics 40mm</li>
+            <li class="hover:text-on-surface transition-colors cursor-pointer">Spatial Telemetry 360°</li>
+            <li class="hover:text-on-surface transition-colors cursor-pointer">Low-Latency 0.03s Engine</li>
+            <li class="hover:text-on-surface transition-colors cursor-pointer">Firmware Matrix &amp; OTA</li>
+          </ul>
+        </div>
+
+        <div class="space-y-space-sm">
+          <div class="font-label-lg text-label-lg text-on-surface uppercase font-bold tracking-wider">Community &amp; Crew</div>
+          <ul class="space-y-2 font-body-sm text-body-sm">
+            <li class="hover:text-on-surface transition-colors cursor-pointer">ShivHeadphones Community</li>
+            <li class="hover:text-on-surface transition-colors cursor-pointer">Pro Producer Soundpacks</li>
+            <li class="hover:text-on-surface transition-colors cursor-pointer">Cyber Sonic Discord</li>
+            <li class="hover:text-on-surface transition-colors cursor-pointer">Global Beta Program</li>
+            <li class="hover:text-on-surface transition-colors cursor-pointer">Creator Sponsorships</li>
+          </ul>
+        </div>
+
+        <div class="space-y-space-sm">
+          <div class="font-label-lg text-label-lg text-on-surface uppercase font-bold tracking-wider">Frequency Dispatch</div>
+          <p class="font-body-sm text-body-sm text-on-surface-variant">Receive direct neural telemetry drops, acoustics updates, and limited hardware batch reserves.</p>
+          <form class="space-y-space-xs">
+            <div class="relative">
+              <input class="w-full px-space-sm py-2 rounded-lg bg-surface-container-low text-on-surface font-label-md text-label-md placeholder:text-outline focus:outline-none focus:ring-1 focus:ring-primary-container" placeholder="developer@nirvana.audio" type="email" />
+              <button class="absolute right-1 top-1 bottom-1 px-3 rounded-lg bg-primary-container font-label-sm text-label-sm text-on-primary-container font-bold hover:brightness-110 transition-all" type="button">JOIN</button>
+            </div>
+            <span class="font-label-sm text-label-sm text-outline block">Encrypted telemetry channel. Zero spam.</span>
+          </form>
+        </div>
+      </div>
+
+      <div class="pt-space-lg flex flex-col md:flex-row items-center justify-between gap-space-md text-center md:text-left border-t border-surface-container">
+        <div class="flex items-center gap-space-sm flex-wrap justify-center">
+          <span class="font-label-sm text-label-sm text-outline">SECURITY COMPLIANCE:</span>
+          <span class="font-label-sm text-label-sm text-on-surface-variant">ISO/IEC 27001</span>
+          <span class="font-label-sm text-label-sm text-on-surface-variant">•</span>
+          <span class="font-label-sm text-label-sm text-on-surface-variant">CE-RED RF CERTIFIED</span>
+          <span class="font-label-sm text-label-sm text-on-surface-variant">•</span>
+          <span class="font-label-sm text-label-sm text-on-surface-variant">ROHS COMPLIANT</span>
+        </div>
+        <div class="font-label-sm text-label-sm text-outline">© 2025 ShivHeadphones. All rights reserved. Designed in India for the World.</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Interactive Logic for Finish Selector, ANC Modes & EQ -->
+  <script>
+    // Finish Switcher Logic
+    function selectFinish(finishName, hexColor, stockText, bgTagClass, el) {
+      if (typeof window.setHeadphoneColor === 'function') {
+        window.setHeadphoneColor(hexColor, finishName);
+      }
+
+      const statusTag = document.getElementById('finish-status-tag');
+      if (statusTag) statusTag.innerText = 'ACTIVE FINISH: ' + finishName.toUpperCase();
+      
+      const checkoutFinish = document.getElementById('checkout-finish-desc');
+      if (checkoutFinish) checkoutFinish.innerText = 'Finish: ' + finishName;
+
+      document.querySelectorAll('.finish-card').forEach(card => {
+        card.classList.remove('bg-surface-container-high', 'shadow-2xl');
+      });
+      if (el) {
+        el.classList.add('bg-surface-container-high', 'shadow-2xl');
+      }
+    }
+
+    // Toggle 3D Widget minimize/expand
+    function toggleMini3D(show) {
+      const card = document.getElementById('mini-3d-card');
+      const launcher = document.getElementById('mini-3d-launcher');
+      if (!card || !launcher) return;
+      if (show) {
+        card.classList.remove('hidden');
+        launcher.classList.add('hidden');
+      } else {
+        card.classList.add('hidden');
+        launcher.classList.remove('hidden');
+      }
+    }
+    window.toggleMini3D = toggleMini3D;
+
+    // Expose functions globally for inline HTML click handlers
+    window.selectFinish = selectFinish;
+    window.switchAncMode = switchAncMode;
+    window.setEqPreset = setEqPreset;
+  </script>
+
+  <!-- Realtime 3D Procedural Headphone Engine (Three.js) -->
+  <script>
+    (function initSmall3DHeadphone() {
+      const container = document.getElementById('threejs-container-ANIMATION_3');
+      if (!container || typeof THREE === 'undefined') {
+        setTimeout(initSmall3DHeadphone, 150);
+        return;
+      }
+
+      const width = container.clientWidth || 215;
+      const height = container.clientHeight || 190;
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
+      camera.position.set(0, 0, 9.6);
+
+      const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+      renderer.setSize(width, height);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = 1.25;
+      container.appendChild(renderer.domElement);
+
+      // Lighting Setup
+      const ambientLight = new THREE.AmbientLight(0xffffff, 0.85);
+      scene.add(ambientLight);
+
+      const dirLight1 = new THREE.DirectionalLight(0xffffff, 2.2);
+      dirLight1.position.set(5, 8, 6);
+      scene.add(dirLight1);
+
+      const redRimLight = new THREE.PointLight(0xff003c, 3.5, 20);
+      redRimLight.position.set(-6, -2, -3);
+      scene.add(redRimLight);
+
+      const cyanRimLight = new THREE.PointLight(0x00f0ff, 2.8, 20);
+      cyanRimLight.position.set(6, 4, -4);
+      scene.add(cyanRimLight);
+
+      // Headphone Group
+      const headphoneGroup = new THREE.Group();
+
+      // Materials
+      const matteBlackMat = new THREE.MeshStandardMaterial({
+        color: 0x18181b,
+        roughness: 0.35,
+        metalness: 0.6
+      });
+
+      const cushionMat = new THREE.MeshStandardMaterial({
+        color: 0x0f0f11,
+        roughness: 0.85,
+        metalness: 0.1
+      });
+
+      const accentRedMat = new THREE.MeshStandardMaterial({
+        color: 0xff003c,
+        roughness: 0.2,
+        metalness: 0.8,
+        emissive: 0x330008
+      });
+
+      const silverTrimMat = new THREE.MeshStandardMaterial({
+        color: 0xcccccc,
+        roughness: 0.2,
+        metalness: 0.95
+      });
+
+      // 1. Headband Arch
+      const curvePoints = [];
+      const r = 2.4;
+      for (let i = 0; i <= 32; i++) {
+        const theta = (Math.PI * 0.15) + (Math.PI * 0.7 * (i / 32));
+        curvePoints.push(new THREE.Vector3(Math.cos(theta) * r, Math.sin(theta) * (r * 1.05) + 0.3, 0));
+      }
+      const headbandCurve = new THREE.CatmullRomCurve3(curvePoints);
+      const headbandGeo = new THREE.TubeGeometry(headbandCurve, 40, 0.22, 16, false);
+      const headbandMesh = new THREE.Mesh(headbandGeo, matteBlackMat);
+      headphoneGroup.add(headbandMesh);
+
+      // Inner cushion on top
+      const cushionCurvePoints = [];
+      for (let i = 0; i <= 24; i++) {
+        const theta = (Math.PI * 0.25) + (Math.PI * 0.5 * (i / 24));
+        cushionCurvePoints.push(new THREE.Vector3(Math.cos(theta) * (r - 0.08), Math.sin(theta) * (r * 1.05 - 0.08) + 0.3, 0));
+      }
+      const cushionCurve = new THREE.CatmullRomCurve3(cushionCurvePoints);
+      const headbandCushionGeo = new THREE.TubeGeometry(cushionCurve, 30, 0.26, 16, false);
+      const headbandCushionMesh = new THREE.Mesh(headbandCushionGeo, cushionMat);
+      headphoneGroup.add(headbandCushionMesh);
+
+      // Metallic headband sliders / hinges & earcups
+      [-1, 1].forEach((side) => {
+        const hingeX = side * 2.15;
+        const hingeY = 1.1;
+
+        const sliderGeo = new THREE.CylinderGeometry(0.24, 0.24, 0.6, 16);
+        const sliderMesh = new THREE.Mesh(sliderGeo, silverTrimMat);
+        sliderMesh.position.set(hingeX, hingeY, 0);
+        sliderMesh.rotation.z = side * -0.35;
+        headphoneGroup.add(sliderMesh);
+
+        // Fork / Yoke holding earcup
+        const forkGeo = new THREE.TorusGeometry(0.9, 0.09, 12, 24, Math.PI * 0.85);
+        const forkMesh = new THREE.Mesh(forkGeo, matteBlackMat);
+        forkMesh.position.set(side * 2.2, 0.1, 0);
+        forkMesh.rotation.z = side * -1.57;
+        forkMesh.rotation.y = Math.PI / 2;
+        headphoneGroup.add(forkMesh);
+
+        // Earcup Assembly
+        const earcupGroup = new THREE.Group();
+        earcupGroup.position.set(side * 2.2, -0.6, 0);
+        earcupGroup.rotation.y = side * 0.15;
+        earcupGroup.rotation.x = 0.05;
+
+        // Outer Shell / Cup
+        const cupGeo = new THREE.CylinderGeometry(1.05, 1.15, 0.6, 32);
+        cupGeo.scale(0.85, 1, 1.1);
+        const cupMesh = new THREE.Mesh(cupGeo, matteBlackMat);
+        cupMesh.rotation.z = Math.PI / 2;
+        earcupGroup.add(cupMesh);
+
+        // Outer cap plate with red ring accent
+        const ringGeo = new THREE.TorusGeometry(0.8, 0.04, 16, 32);
+        ringGeo.scale(0.85, 1.1, 1);
+        const ringMesh = new THREE.Mesh(ringGeo, accentRedMat);
+        ringMesh.position.x = side * 0.31;
+        ringMesh.rotation.y = Math.PI / 2;
+        earcupGroup.add(ringMesh);
+
+        // Center logo medallion
+        const medallionGeo = new THREE.CylinderGeometry(0.55, 0.55, 0.06, 32);
+        const medallionMesh = new THREE.Mesh(medallionGeo, silverTrimMat);
+        medallionMesh.position.x = side * 0.32;
+        medallionMesh.rotation.z = Math.PI / 2;
+        earcupGroup.add(medallionMesh);
+
+        // Memory foam cushion
+        const cushionEarGeo = new THREE.TorusGeometry(0.85, 0.35, 18, 32);
+        cushionEarGeo.scale(0.85, 1.12, 1);
+        const cushionEarMesh = new THREE.Mesh(cushionEarGeo, cushionMat);
+        cushionEarMesh.position.x = -side * 0.3;
+        cushionEarMesh.rotation.y = Math.PI / 2;
+        earcupGroup.add(cushionEarMesh);
+
+        // Inner speaker grille
+        const grilleGeo = new THREE.CylinderGeometry(0.7, 0.7, 0.05, 24);
+        grilleGeo.scale(0.85, 1, 1.1);
+        const grilleMesh = new THREE.Mesh(grilleGeo, new THREE.MeshBasicMaterial({ color: 0x111111 }));
+        grilleMesh.position.x = -side * 0.28;
+        grilleMesh.rotation.z = Math.PI / 2;
+        earcupGroup.add(grilleMesh);
+
+        headphoneGroup.add(earcupGroup);
+      });
+
+      // Soundwave floating particles
+      const particleCount = 45;
+      const particleGeo = new THREE.BufferGeometry();
+      const particlePos = new Float32Array(particleCount * 3);
+      for (let i = 0; i < particleCount * 3; i += 3) {
+        particlePos[i] = (Math.random() - 0.5) * 7;
+        particlePos[i + 1] = (Math.random() - 0.5) * 5;
+        particlePos[i + 2] = (Math.random() - 0.5) * 4.5;
+      }
+      particleGeo.setAttribute('position', new THREE.BufferAttribute(particlePos, 3));
+      const particleMat = new THREE.PointsMaterial({
+        color: 0xff003c,
+        size: 0.09,
+        transparent: true,
+        opacity: 0.8
+      });
+      const particles = new THREE.Points(particleGeo, particleMat);
+      scene.add(particles);
+
+      scene.add(headphoneGroup);
+
+      // Initial angles
+      headphoneGroup.rotation.y = 0.5;
+      headphoneGroup.rotation.x = 0.15;
+
+      let targetRotY = 0.5;
+      let targetRotX = 0.15;
+      let isDragging = false;
+      let prevX = 0;
+      let prevY = 0;
+
+      // Direct Drag Rotation on Widget Canvas
+      container.addEventListener('pointerdown', (e) => {
+        isDragging = true;
+        prevX = e.clientX;
+        prevY = e.clientY;
+        container.style.cursor = 'grabbing';
+        try { container.setPointerCapture(e.pointerId); } catch(err){}
+      });
+
+      window.addEventListener('pointermove', (e) => {
+        if (isDragging) {
+          const dx = e.clientX - prevX;
+          const dy = e.clientY - prevY;
+          targetRotY += dx * 0.02;
+          targetRotX += dy * 0.02;
+          prevX = e.clientX;
+          prevY = e.clientY;
+        } else {
+          // Gentle ambient tilt when mouse moves across screen
+          const rect = container.getBoundingClientRect();
+          const x = ((e.clientX - rect.left) / window.innerWidth) * 2 - 1;
+          const y = -(((e.clientY - rect.top) / window.innerHeight) * 2 - 1);
+          targetRotY += (0.5 + x * 0.4 - targetRotY) * 0.015;
+        }
+      });
+
+      window.addEventListener('pointerup', (e) => {
+        isDragging = false;
+        container.style.cursor = 'grab';
+        try { container.releasePointerCapture(e.pointerId); } catch(err){}
+      });
+
+      // Global Color Switcher Hook
+      window.setHeadphoneColor = function(colorHex, name) {
+        if (matteBlackMat) {
+          const c = new THREE.Color(colorHex);
+          matteBlackMat.color = c;
+          if (colorHex === 0xff003c) {
+            accentRedMat.color = new THREE.Color(0xffffff);
+            particleMat.color = new THREE.Color(0xff003c);
+          } else {
+            accentRedMat.color = new THREE.Color(0xff003c);
+            particleMat.color = c;
+          }
+        }
+        const label = document.getElementById('mini-3d-finish-label');
+        if (label && name) label.innerText = name.toUpperCase();
+      };
+
+      // 60 FPS Render Loop
+      let clock = new THREE.Clock();
+      function animate() {
+        requestAnimationFrame(animate);
+        const elapsed = clock.getElapsedTime();
+
+        // Smooth floating motion
+        headphoneGroup.position.y = Math.sin(elapsed * 1.5) * 0.12;
+
+        // Smooth lerp for rotation
+        headphoneGroup.rotation.y += (targetRotY - headphoneGroup.rotation.y) * 0.08;
+        headphoneGroup.rotation.x += (targetRotX - headphoneGroup.rotation.x) * 0.08;
+
+        // Gentle particle rotation
+        particles.rotation.y = elapsed * 0.05;
+
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      function syncSize() {
+        const w = container.clientWidth || 215;
+        const h = container.clientHeight || 190;
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+        renderer.setSize(w, h);
+      }
+
+      window.addEventListener('resize', syncSize);
+      if (typeof ResizeObserver !== 'undefined') {
+        new ResizeObserver(syncSize).observe(container);
+      }
+    })();
+  </script>
+
+  <!-- 3D Scroll Driven Animation Engine -->
+  <script type="module" src="./main.js"></script>
+  <!-- ==================== EXPLORE HEADPHONES MODAL ==================== -->
+  <div id="explore-modal" class="hidden fixed inset-0 z-[9000] flex items-start justify-center overflow-y-auto" style="background: rgba(0,0,0,0.85); backdrop-filter: blur(8px);">
+    <div class="w-full max-w-[1200px] mx-auto px-4 md:px-8 py-8 md:py-12 relative">
+      <!-- Modal Header -->
+      <div class="flex items-center justify-between mb-8">
+        <div>
+          <div class="font-label-sm text-label-sm text-primary uppercase tracking-widest mb-1">// SHIVHEADPHONES COLLECTION</div>
+          <h2 class="font-headline-lg text-headline-lg uppercase text-on-surface">Explore Our Headphones</h2>
+          <p class="font-body-md text-body-md text-on-surface-variant mt-1">Premium audio engineered in India. Prices from ₹2,000 to ₹10,000.</p>
+        </div>
+        <button onclick="document.getElementById('explore-modal').classList.add('hidden')" class="w-10 h-10 rounded-xl bg-surface-container-high flex items-center justify-center text-on-surface hover:bg-primary-container hover:text-on-primary-container transition-all shrink-0">
+          <span class="material-symbols-outlined text-[22px]">close</span>
+        </button>
+      </div>
+
+      <!-- Product Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+
+        <!-- Product 1 -->
+        <div class="bg-surface-container rounded-xl overflow-hidden group hover:bg-surface-container-high transition-all duration-300 shadow-lg hover:shadow-2xl flex flex-col justify-between">
+          <div class="w-full aspect-square bg-surface-container-lowest flex items-center justify-center p-4 relative overflow-hidden">
+            <img src="/images/headphones/headphone.jpeg" alt="ShivAura 200" class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" loading="lazy" />
+            <div class="absolute top-3 right-3 px-2 py-0.5 rounded bg-tertiary text-on-tertiary font-label-sm text-label-sm uppercase font-bold shadow">Bestseller</div>
+          </div>
+          <div class="p-4 space-y-2">
+            <div class="font-headline-sm text-[16px] font-bold text-on-surface">ShivAura 200</div>
+            <div class="font-label-sm text-label-sm text-on-surface-variant">Wireless • 20H Battery • Bass Boost</div>
+            <div class="flex items-center justify-between pt-1">
+              <span class="font-headline-md text-[20px] font-bold text-primary">₹2,499</span>
+              <button onclick="alert('ShivAura 200 added to cart!')" class="px-3 py-1.5 rounded-lg bg-primary-container text-on-primary-container font-label-sm text-label-sm font-bold uppercase hover:brightness-110 transition-all cursor-pointer">Buy</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 2 -->
+        <div class="bg-surface-container rounded-xl overflow-hidden group hover:bg-surface-container-high transition-all duration-300 shadow-lg hover:shadow-2xl flex flex-col justify-between">
+          <div class="w-full aspect-square bg-surface-container-lowest flex items-center justify-center p-4 relative overflow-hidden">
+            <img src="/images/headphones/h2.jpg" alt="ShivBass Pro 400" class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" loading="lazy" />
+            <div class="absolute top-3 right-3 px-2 py-0.5 rounded bg-secondary text-on-secondary font-label-sm text-label-sm uppercase font-bold shadow">New</div>
+          </div>
+          <div class="p-4 space-y-2">
+            <div class="font-headline-sm text-[16px] font-bold text-on-surface">ShivBass Pro 400</div>
+            <div class="font-label-sm text-label-sm text-on-surface-variant">ANC • 30H Battery • Deep Bass</div>
+            <div class="flex items-center justify-between pt-1">
+              <span class="font-headline-md text-[20px] font-bold text-primary">₹3,999</span>
+              <button onclick="alert('ShivBass Pro 400 added to cart!')" class="px-3 py-1.5 rounded-lg bg-primary-container text-on-primary-container font-label-sm text-label-sm font-bold uppercase hover:brightness-110 transition-all cursor-pointer">Buy</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 3 -->
+        <div class="bg-surface-container rounded-xl overflow-hidden group hover:bg-surface-container-high transition-all duration-300 shadow-lg hover:shadow-2xl flex flex-col justify-between">
+          <div class="w-full aspect-square bg-surface-container-lowest flex items-center justify-center p-4 relative overflow-hidden">
+            <img src="/images/headphones/h3.jpg" alt="ShivSonic X1" class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" loading="lazy" />
+          </div>
+          <div class="p-4 space-y-2">
+            <div class="font-headline-sm text-[16px] font-bold text-on-surface">ShivSonic X1</div>
+            <div class="font-label-sm text-label-sm text-on-surface-variant">Spatial Audio • BT 5.3 • 40mm Driver</div>
+            <div class="flex items-center justify-between pt-1">
+              <span class="font-headline-md text-[20px] font-bold text-primary">₹4,499</span>
+              <button onclick="alert('ShivSonic X1 added to cart!')" class="px-3 py-1.5 rounded-lg bg-primary-container text-on-primary-container font-label-sm text-label-sm font-bold uppercase hover:brightness-110 transition-all cursor-pointer">Buy</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 4 -->
+        <div class="bg-surface-container rounded-xl overflow-hidden group hover:bg-surface-container-high transition-all duration-300 shadow-lg hover:shadow-2xl flex flex-col justify-between">
+          <div class="w-full aspect-square bg-surface-container-lowest flex items-center justify-center p-4 relative overflow-hidden">
+            <img src="/images/headphones/h4.avif" alt="ShivNoise 500" class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" loading="lazy" />
+            <div class="absolute top-3 right-3 px-2 py-0.5 rounded bg-primary-container text-on-primary-container font-label-sm text-label-sm uppercase font-bold shadow">Popular</div>
+          </div>
+          <div class="p-4 space-y-2">
+            <div class="font-headline-sm text-[16px] font-bold text-on-surface">ShivNoise 500</div>
+            <div class="font-label-sm text-label-sm text-on-surface-variant">Hybrid ANC • 40dB • LDAC</div>
+            <div class="flex items-center justify-between pt-1">
+              <span class="font-headline-md text-[20px] font-bold text-primary">₹5,999</span>
+              <button onclick="alert('ShivNoise 500 added to cart!')" class="px-3 py-1.5 rounded-lg bg-primary-container text-on-primary-container font-label-sm text-label-sm font-bold uppercase hover:brightness-110 transition-all cursor-pointer">Buy</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 5 -->
+        <div class="bg-surface-container rounded-xl overflow-hidden group hover:bg-surface-container-high transition-all duration-300 shadow-lg hover:shadow-2xl flex flex-col justify-between">
+          <div class="w-full aspect-square bg-surface-container-lowest flex items-center justify-center p-4 relative overflow-hidden">
+            <img src="/images/headphones/h5.avif" alt="ShivStrike Gaming" class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" loading="lazy" />
+          </div>
+          <div class="p-4 space-y-2">
+            <div class="font-headline-sm text-[16px] font-bold text-on-surface">ShivStrike Gaming</div>
+            <div class="font-label-sm text-label-sm text-on-surface-variant">35ms Latency • RGB • Mic</div>
+            <div class="flex items-center justify-between pt-1">
+              <span class="font-headline-md text-[20px] font-bold text-primary">₹3,499</span>
+              <button onclick="alert('ShivStrike Gaming added to cart!')" class="px-3 py-1.5 rounded-lg bg-primary-container text-on-primary-container font-label-sm text-label-sm font-bold uppercase hover:brightness-110 transition-all cursor-pointer">Buy</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 6 -->
+        <div class="bg-surface-container rounded-xl overflow-hidden group hover:bg-surface-container-high transition-all duration-300 shadow-lg hover:shadow-2xl flex flex-col justify-between">
+          <div class="w-full aspect-square bg-surface-container-lowest flex items-center justify-center p-4 relative overflow-hidden">
+            <img src="/images/headphones/h6.avif" alt="ShivStudio Pro 700" class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" loading="lazy" />
+            <div class="absolute top-3 right-3 px-2 py-0.5 rounded bg-error-container text-on-error-container font-label-sm text-label-sm uppercase font-bold shadow">Limited</div>
+          </div>
+          <div class="p-4 space-y-2">
+            <div class="font-headline-sm text-[16px] font-bold text-on-surface">ShivStudio Pro 700</div>
+            <div class="font-label-sm text-label-sm text-on-surface-variant">Studio Monitor • Hi-Res • 50mm</div>
+            <div class="flex items-center justify-between pt-1">
+              <span class="font-headline-md text-[20px] font-bold text-primary">₹7,999</span>
+              <button onclick="alert('ShivStudio Pro 700 added to cart!')" class="px-3 py-1.5 rounded-lg bg-primary-container text-on-primary-container font-label-sm text-label-sm font-bold uppercase hover:brightness-110 transition-all cursor-pointer">Buy</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 7 -->
+        <div class="bg-surface-container rounded-xl overflow-hidden group hover:bg-surface-container-high transition-all duration-300 shadow-lg hover:shadow-2xl flex flex-col justify-between">
+          <div class="w-full aspect-square bg-surface-container-lowest flex items-center justify-center p-4 relative overflow-hidden">
+            <img src="/images/headphones/h7.avif" alt="ShivBeats Lite" class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" loading="lazy" />
+          </div>
+          <div class="p-4 space-y-2">
+            <div class="font-headline-sm text-[16px] font-bold text-on-surface">ShivBeats Lite</div>
+            <div class="font-label-sm text-label-sm text-on-surface-variant">Compact • Foldable • 25H Battery</div>
+            <div class="flex items-center justify-between pt-1">
+              <span class="font-headline-md text-[20px] font-bold text-primary">₹2,199</span>
+              <button onclick="alert('ShivBeats Lite added to cart!')" class="px-3 py-1.5 rounded-lg bg-primary-container text-on-primary-container font-label-sm text-label-sm font-bold uppercase hover:brightness-110 transition-all cursor-pointer">Buy</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 8 -->
+        <div class="bg-surface-container rounded-xl overflow-hidden group hover:bg-surface-container-high transition-all duration-300 shadow-lg hover:shadow-2xl flex flex-col justify-between">
+          <div class="w-full aspect-square bg-surface-container-lowest flex items-center justify-center p-4 relative overflow-hidden">
+            <img src="/images/headphones/h8.avif" alt="ShivElite Max" class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" loading="lazy" />
+            <div class="absolute top-3 right-3 px-2 py-0.5 rounded bg-tertiary-container text-on-tertiary-container font-label-sm text-label-sm uppercase font-bold shadow">Flagship</div>
+          </div>
+          <div class="p-4 space-y-2">
+            <div class="font-headline-sm text-[16px] font-bold text-on-surface">ShivElite Max</div>
+            <div class="font-label-sm text-label-sm text-on-surface-variant">Beryllium 40mm • ANC • 65H • LDAC</div>
+            <div class="flex items-center justify-between pt-1">
+              <span class="font-headline-md text-[20px] font-bold text-primary">₹9,999</span>
+              <button onclick="alert('ShivElite Max added to cart!')" class="px-3 py-1.5 rounded-lg bg-primary-container text-on-primary-container font-label-sm text-label-sm font-bold uppercase hover:brightness-110 transition-all cursor-pointer">Buy</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Footer -->
+      <div class="mt-8 text-center font-label-sm text-label-sm text-on-surface-variant">
+        All prices inclusive of GST. Free shipping across India on orders above ₹3,000.
+      </div>
+    </div>
+  </div>
+
+  <!-- Close modal on backdrop click -->
+  <script>
+    document.getElementById('explore-modal').addEventListener('click', function(e) {
+      if (e.target === this) this.classList.add('hidden');
+    });
+  </script>
+
+</body>
+</html>
