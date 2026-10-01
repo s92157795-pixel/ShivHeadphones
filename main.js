@@ -53,9 +53,10 @@ function resizeCanvas() {
 
 /**
  * Render frame on canvas:
- * - On Mobile: Full-frame cover rendering for both portrait (vertical) and landscape (horizontal),
- *   eliminating letterbox/pillarbox bars so the headphones fully fill the screen frame.
- * - On PC: Preserves exact desktop horizontal containment logic unchanged.
+ * - On Mobile: Nicely covered frame (not so big, not so small)
+ *   Portrait (vertical): Headphone fills the phone width edge-to-edge with no cut-off components.
+ *   Landscape (horizontal): Scaled to fit comfortably within the landscape height.
+ * - On PC: Exact desktop horizontal containment logic unchanged.
  */
 function drawContainedImage(img) {
   const cw = canvas.width;
@@ -71,8 +72,16 @@ function drawContainedImage(img) {
                    (window.innerWidth <= 1024 && window.innerHeight <= 500);
 
   if (isMobile) {
-    // Full frame for mobile phones in both vertical (portrait) and horizontal (landscape)
-    const scale = Math.max(cw / iw, ch / ih);
+    let scale;
+    if (ch >= cw) {
+      // Portrait (vertical): Active subject width is ~710px.
+      // Scaling by cw / 710 fills the width edge-to-edge without cutting off earcups.
+      scale = cw / 710;
+    } else {
+      // Landscape (horizontal): Scale to comfortably fit within screen height
+      scale = Math.min(cw / iw, (ch * 0.90) / ih);
+    }
+
     const dw = Math.round(iw * scale);
     const dh = Math.round(ih * scale);
     const dx = Math.round((cw - dw) / 2);

@@ -1125,6 +1125,11 @@
     }
     window.toggleMini3D = toggleMini3D;
 
+    // Start minimized on mobile screens so it does not obstruct the headphone animation
+    if (window.innerWidth <= 768) {
+      toggleMini3D(false);
+    }
+
     // Expose functions globally for inline HTML click handlers
     window.selectFinish = selectFinish;
     window.switchAncMode = switchAncMode;
