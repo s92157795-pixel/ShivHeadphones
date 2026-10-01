@@ -52,8 +52,10 @@ function resizeCanvas() {
 }
 
 /**
- * Draw image full screen horizontally (edge-to-edge 100% width)
- * maintaining aspect ratio and vertically centered
+ * Render frame on canvas:
+ * - On Mobile: Full-frame cover rendering for both portrait (vertical) and landscape (horizontal),
+ *   eliminating letterbox/pillarbox bars so the headphones fully fill the screen frame.
+ * - On PC: Preserves exact desktop horizontal containment logic unchanged.
  */
 function drawContainedImage(img) {
   const cw = canvas.width;
@@ -63,16 +65,34 @@ function drawContainedImage(img) {
   const iw = img.naturalWidth || FRAME_WIDTH;
   const ih = img.naturalHeight || FRAME_HEIGHT;
 
-  // Scale to fill full screen horizontally
-  const scale = cw / iw;
-  const dw = cw;
-  const dh = Math.round(ih * scale);
-  const dx = 0;
-  const dy = Math.round((ch - dh) / 2);
+  const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) ||
+                   ('ontouchstart' in window && (window.innerWidth <= 1024 || window.innerHeight <= 600)) ||
+                   window.innerWidth <= 768 ||
+                   (window.innerWidth <= 1024 && window.innerHeight <= 500);
 
-  ctx.fillStyle = '#000000';
-  ctx.fillRect(0, 0, cw, ch);
-  ctx.drawImage(img, dx, dy, dw, dh);
+  if (isMobile) {
+    // Full frame for mobile phones in both vertical (portrait) and horizontal (landscape)
+    const scale = Math.max(cw / iw, ch / ih);
+    const dw = Math.round(iw * scale);
+    const dh = Math.round(ih * scale);
+    const dx = Math.round((cw - dw) / 2);
+    const dy = Math.round((ch - dh) / 2);
+
+    ctx.fillStyle = '#000000';
+    ctx.fillRect(0, 0, cw, ch);
+    ctx.drawImage(img, dx, dy, dw, dh);
+  } else {
+    // PC: exact original logic unchanged
+    const scale = cw / iw;
+    const dw = cw;
+    const dh = Math.round(ih * scale);
+    const dx = 0;
+    const dy = Math.round((ch - dh) / 2);
+
+    ctx.fillStyle = '#000000';
+    ctx.fillRect(0, 0, cw, ch);
+    ctx.drawImage(img, dx, dy, dw, dh);
+  }
 }
 
 /**
@@ -264,11 +284,19 @@ function preloadFrames() {
 function init() {
   resizeCanvas();
 
-  window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', () => {
+  const handleResize = () => {
     resizeCanvas();
     onScroll();
+  };
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', handleResize, { passive: true });
+  window.addEventListener('orientationchange', () => {
+    setTimeout(handleResize, 100);
   }, { passive: true });
+  if (screen.orientation) {
+    screen.orientation.addEventListener('change', handleResize);
+  }
 
   onScroll();
   preloadFrames();
